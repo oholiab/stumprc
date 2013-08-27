@@ -1,7 +1,8 @@
-URxvt.keysym.M-u: perl:mark-yank-urls:activate_mark_mode
 URxvt.underlineURLs: true
+URxvt.keysym.M-y: perl:mark-and-yank:activate_mark_mode
+URxvt.keysym.M-u: perl:mark-and-yank:activate_mark_url_mode
 URxvt.perl-lib: /home/vagrant/.urxvt/                               <--- your path
-URxvt.perl-ext: selection,mark-yank-urls
+URxvt.perl-ext: mark-and-yank
 URxvt.urlLauncher: iceweasel
 
 urxvt*foreground: #ffffff
@@ -25,6 +26,6 @@ urxvt*color15: #EEEEEC
 urxvt*font: xft:Bitstream\ Vera\ Sans\ Mono:style=roman:pixelsize=12
 
 urxvt*scrollBar: false
-urxvt*internalBorder: 0
+urxvt*internalBorder: 2
 urxvt*transparent: true
 urxvt*shading: 10

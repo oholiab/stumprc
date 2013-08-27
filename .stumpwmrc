@@ -1,5 +1,11 @@
 (set-prefix-key (kbd "C-i"))
 
+(defcommand urxvt () ()
+  (run-shell-command "urxvt --perl-lib ${HOME}/.urxvt/ -pe mark-and-yank"))
+
+(define-key *root-map* (kbd "c") "urxvt")
+(define-key *root-map* (kbd "ESC") "abort")
+
 (define-key *top-map* (kbd "M-h") "move-focus left") 
 (define-key *top-map* (kbd "M-l") "move-focus right") 
 (define-key *top-map* (kbd "M-k") "move-focus up") 
@@ -9,4 +15,7 @@
   (run-or-raise "iceweasel" '(:class "Iceweasel")))
 
 (define-key *root-map* (kbd "w") "iceweasel")
-(toggle-mode-line (current-screen) (current-head)
+(toggle-mode-line (current-screen) (current-head))
+
+(setf *window-border-style* :tight) 
+(set-font "-misc-fixed-medium-r-normal--10-100-75-75-c-60-*-*")
