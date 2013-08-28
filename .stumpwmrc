@@ -1,10 +1,30 @@
+; So important
+(run-shell-command "xset b off")
+
 (set-prefix-key (kbd "C-i"))
 
+(setf *startup-message* nil)
+(setf *startup-message* "HACK THE PLANET.")
+
+(setf *input-window-gravity* :bottom-left)
+(setf *message-window-gravity* :bottom-left)
+
 (defcommand urxvt () ()
-  (run-shell-command "urxvt --perl-lib ${HOME}/.urxvt/ -pe mark-and-yank"))
+  (run-shell-command "urxvt --perl-lib ${HOME}/.urxvt/ -pe mark-and-yank -letsp -1"))
+
+(defcommand lock () ()
+  (run-shell-command "xscreensaver-command -lock"))
+
+;(define-key *root-map* (kbd "l"
+
+; Next one doesn't work because of keymaps
+;(define-key *top-map* (kbd "H-l") "lock")
+(define-key *root-map* (kbd "l") "lock")
 
 (define-key *root-map* (kbd "c") "urxvt")
 (define-key *root-map* (kbd "ESC") "abort")
+(define-key *root-map* (kbd "t") "time")
+(define-key *root-map* (kbd "C-i") "loadrc")
 
 (define-key *top-map* (kbd "M-h") "move-focus left") 
 (define-key *top-map* (kbd "M-l") "move-focus right") 
