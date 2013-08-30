@@ -1,5 +1,6 @@
 ; So important
 (run-shell-command "xset b off")
+(run-shell-command "xscreensaver")
 
 (set-prefix-key (kbd "C-i"))
 
@@ -14,6 +15,9 @@
 
 (defcommand lock () ()
   (run-shell-command "xscreensaver-command -lock"))
+
+(defcommand paste () ()
+	(window-send-string (get-x-selection)))
 
 ;(define-key *root-map* (kbd "l"
 
@@ -31,11 +35,16 @@
 (define-key *top-map* (kbd "M-k") "move-focus up") 
 (define-key *top-map* (kbd "M-j") "move-focus down") 
 
+(define-key *top-map* (kbd "M-H") "gprev")
+(define-key *top-map* (kbd "M-L") "gnext")
+
 (defcommand iceweasel () ()
   (run-or-raise "iceweasel" '(:class "Iceweasel")))
 
 (define-key *root-map* (kbd "w") "iceweasel")
 (toggle-mode-line (current-screen) (current-head))
 
-(setf *window-border-style* :tight) 
-(set-font "-misc-fixed-medium-r-normal--10-100-75-75-c-60-*-*")
+(setf *window-border-style* :thin) 
+(set-font "-adobe-helvetica-bold-r-*-*-11-*-*-*-*-*-*-*")
+(set-focus-color "green")
+;(set-unfocus-color "dark-grey")
