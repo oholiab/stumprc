@@ -19,11 +19,11 @@
 (defcommand paste () ()
 	(window-send-string (get-x-selection)))
 
-;(define-key *root-map* (kbd "l"
+(defcommand email () ()
+	(window-send-string "matt.carroll@7digital.com"))
 
-; Next one doesn't work because of keymaps
-;(define-key *top-map* (kbd "H-l") "lock")
 (define-key *root-map* (kbd "l") "lock")
+(define-key *root-map* (kbd "v") "paste")
 
 (define-key *root-map* (kbd "c") "urxvt")
 (define-key *root-map* (kbd "ESC") "abort")
