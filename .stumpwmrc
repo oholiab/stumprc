@@ -1,6 +1,25 @@
 ; So important
+(in-package :stumpwm)
 (run-shell-command "xset b off")
 (run-shell-command "xscreensaver")
+
+(defun head-file (filename)
+	(let ((afile (open filename :if-does-not-exist nil)))
+		(when afile
+			(defparameter *s* (read-line afile))
+			(close afile))
+	*s*))
+
+(defun slow-print (somestring)
+  (loop for i in (coerce somestring 'list) do
+        (window-send-string (string i))
+        (sleep 0.05)))
+
+(defcommand spaste () ()
+  (slow-print (get-x-selection)))
+
+;(setf *hostname* (head-file "/etc/hostname"))
+
 
 (set-prefix-key (kbd "C-i"))
 
@@ -19,8 +38,11 @@
 (defcommand paste () ()
 	(window-send-string (get-x-selection)))
 
-(defcommand email () ()
-	(window-send-string "matt.carroll@7digital.com"))
+(setf *email* "matt.carroll@7digital.com")
+(defcommand email () () 
+	(loop for x from 0 to (- (length *email*) 1) do 
+		(sleep 0.05)
+		(window-send-string (string (char *email* x)))))
 
 (define-key *root-map* (kbd "l") "lock")
 (define-key *root-map* (kbd "v") "paste")
@@ -41,10 +63,12 @@
 (defcommand iceweasel () ()
   (run-or-raise "iceweasel" '(:class "Iceweasel")))
 
-(define-key *root-map* (kbd "w") "iceweasel")
-(toggle-mode-line (current-screen) (current-head))
+(defcommand rdesktop (host) ((:rest "Host: "))
+	(run-shell-command (concatenate 'string "rdesktop -K -g 1366x1000 " host)))
 
+(define-key *root-map* (kbd "w") "iceweasel")
+(enable-mode-line (current-screen) (current-head) t) 
 (setf *window-border-style* :thin) 
 (set-font "-adobe-helvetica-bold-r-*-*-11-*-*-*-*-*-*-*")
 (set-focus-color "green")
-;(set-unfocus-color "dark-grey")
+;(set-unfocus-color "dark-green")
