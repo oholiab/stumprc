@@ -15,6 +15,15 @@
         (window-send-string (string i))
         (sleep 0.05)))
 
+
+(defun is-browser-title-p (window-title)
+  (if (eq (search "Vimperator" window-title) nil)
+    nil
+    t))
+
+(defcommand qpaste () ()
+  (window-send-string (get-x-selection))) 
+
 (defcommand spaste () ()
   (slow-print (get-x-selection)))
 
@@ -36,7 +45,9 @@
   (run-shell-command "xscreensaver-command -lock"))
 
 (defcommand paste () ()
-	(window-send-string (get-x-selection)))
+  (if (is-browser-title-p (window-name (current-window)))
+    (run-commands "spaste")
+    (run-commands "qpaste")))
 
 (setf *email* "matt.carroll@7digital.com")
 (defcommand email () () 
@@ -64,7 +75,7 @@
   (run-or-raise "iceweasel" '(:class "Iceweasel")))
 
 (defcommand rdesktop (host) ((:rest "Host: "))
-	(run-shell-command (concatenate 'string "rdesktop -K -g 1366x1000 " host)))
+	(run-shell-command (concatenate 'string "rdesktop -K -g 1300x1000 " host)))
 
 (define-key *root-map* (kbd "w") "iceweasel")
 (enable-mode-line (current-screen) (current-head) t) 
