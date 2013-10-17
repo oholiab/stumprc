@@ -1,5 +1,5 @@
 ; So important
-(in-package :stumpwm)
+(in-package #:stumpwm)
 (run-shell-command "xset b off")
 (run-shell-command "xscreensaver")
 
